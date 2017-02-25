@@ -1,0 +1,18 @@
+<%= render '/shared/title', title: '使用者登入'%>
+
+<div class="well">
+  <%= form_tag '/login' do |f| %>
+  <div class="form-group">
+    <%= label_tag :name %>
+    <br>
+    <%= text_field_tag :name, params[:name] %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :password %>
+    <br>
+    <%= password_field_tag :password, params[:password] %>
+  </div>
+  <br>
+  <%= submit_tag "登入", class: "btn btn-success" %>
+  <% end %>
+</div>

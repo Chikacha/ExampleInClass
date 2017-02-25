@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+<div class="well">
+<%= render 'shared/title', title: 'Orders List'%>
+</div>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>票數</th>
+      <th>讚</th>
+      <th>噁</th>
+      <th>姓名</th>
+      <th>Email</th>
+      <th>訂單內容</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.total_votes %></td>
+        <td>
+          <%= link_to vote_order_path(order, vote: true), class: "btn btn-primary", method: 'post' do %>
+          讚
+          <% end %>
+        </td>
+        <td>
+          <%= link_to vote_order_path(order, vote: false), class: "btn btn-danger", method: 'post' do %>
+          噁
+          <% end %>
+        </td>
+
+        <td><%= order.name %></td>
+        <td><%= order.phone %></td>
+        <td><%= order.description %></td>
+        <td><%= link_to '檢視訂單', order_path(order), class: 'btn btn-info' %></td>
+        <% if logged_in? %>
+          <td><%= link_to '編輯訂單', edit_order_path(order), class: 'btn btn-warning' %></td>
+          <td><%= link_to '刪除訂單', order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<br>
+<% if logged_in? %>
+  <%= link_to 'New Order', new_order_path %>
+<% end %>
+
+
+
+
